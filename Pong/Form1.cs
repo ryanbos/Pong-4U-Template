@@ -142,27 +142,29 @@ namespace Pong
             newGameOk = true;
             SetParameters();
 
-            // TODO create code to make a graphics object, a brush, and a font to display the countdown
+            //  create code to make a graphics object, a brush, and a font to display the countdown
 
-            Font drawFont = new Font("Arial", 16);
-            //e.Graphics.DrawString(drawString, drawFont, drawBrush, drawPoint);
-
-
-
+            Font drawFont = new Font("Arial", 51);
+            Graphics formGraphics = this.CreateGraphics();
+            drawBrush.Color = Color.White;
 
 
             startLabel.Visible = false;
             Refresh();
             
             //countdown to start of game
-            for (; ; ) // TODO create conditions for a for loop that counts down from 3 
+            for (int x = 3; x <= 3 && x>0; x --) // create conditions for a for loop that counts down from 3 
             {
-                // --- create code using DrawString to display the countdown in the appropriate area.  
+                // --- create code using DrawString to display the countdown in the appropriate area. 
+                formGraphics.DrawString( Convert.ToString(x), drawFont, drawBrush, 281, 150);
                 // --- sleep for 1 second
+                Thread.Sleep(1000);
                 // --- refresh the screen
+                Refresh();
             }
-            
-            // TODO start the gameUpdateLoop timer
+
+            // start the gameUpdateLoop timer
+            gameUpdateLoop.Start();
             newGameOk = false;
         }
 
@@ -206,9 +208,25 @@ namespace Pong
             #region update ball position
 
             // TODO create code to move ball either left or right based on ballMoveRight and BALL_SPEED
+            if (ballMoveRight == true)
+            {
+                ballX = +BALL_SPEED;
+            }
 
+            else 
+            {
+                ballX = -BALL_SPEED;
+            }
             // TODO create code move ball either down or up based on ballMoveDown and BALL_SPEED
+           if (ballMoveDown == true)
+            {
+                ballY = +BALL_SPEED;
+            }
 
+            else
+            {
+                ballY = -BALL_SPEED;
+            }
             #endregion
 
             #region update paddle positions
